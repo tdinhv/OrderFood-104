@@ -32,14 +32,14 @@ public class CartAdapter extends ArrayAdapter<Food> {
 
     public View getView(int position,View convertView,ViewGroup parent) {
         LayoutInflater inflater = this.context.getLayoutInflater();
-        View row = inflater.inflate(R.layout.lv_food_cart, null);
+        View row = inflater.inflate(R.layout.card_layout, null);
         Food product = this.objects.get(position); // lấy đối tượng từ List
 
-        TextView tvProductNameCart =(TextView) row.findViewById(R.id.tvProductNameCart);
-        TextView tvProductPriceCart =(TextView) row.findViewById(R.id.tvProductPriceCart);
+        TextView card_item_name =(TextView) row.findViewById(R.id.card_item_name);
+        TextView card_item_price =(TextView) row.findViewById(R.id.card_item_price);
 
-        tvProductNameCart.setText(product.getNameFood());
-        tvProductPriceCart.setText(product.getPrice()+"");
+        card_item_name.setText(product.getNameFood());
+        card_item_price.setText(product.getPrice()+"");
         return row;
     }
 }

@@ -45,18 +45,6 @@ public class ProductActivity extends AppCompatActivity {
         lvFood = findViewById(R.id.lv_Product);
         arrFood = new ArrayList<>();
         getList();
-       /* Food food1 = new Food(1, "Hủ tiếu", 12000, R.drawable.anh1, "Vinh Nam", 1, 1);
-        Food food2 = new Food(2, "Hủ tiếu1", 13000, R.drawable.anh2, "Vinh Nam", 1, 1);
-        Food food3 = new Food(3, "Hủ tiếu2", 14000, R.drawable.anh3, "Vinh Nam", 1, 1);
-        Food food4 = new Food(4, "Hủ tiếu3", 15000, R.drawable.anh4, "Vinh Nam", 1, 1);
-        Food food5 = new Food(5, "Hủ tiếu4", 16000, R.drawable.anh5, "Vinh Nam", 1, 1);
-
-        arrFood.add(food1);
-        arrFood.add(food2);
-        arrFood.add(food3);
-        arrFood.add(food4);
-        arrFood.add(food5);*/
-
 
         productAdapter = new FoodAdapter(ProductActivity.this, R.layout.lv_item_food, arrFood);
         lvFood.setAdapter(productAdapter);

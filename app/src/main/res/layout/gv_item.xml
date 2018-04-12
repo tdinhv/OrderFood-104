@@ -12,6 +12,7 @@
         <ImageButton
             android:id="@+id/btnCategory"
             android:layout_width="64dp"
+            android:src="@drawable/anh1"
             android:layout_height="64dp" />
 
         <TextView

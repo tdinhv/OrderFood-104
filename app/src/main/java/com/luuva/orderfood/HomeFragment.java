@@ -13,12 +13,22 @@ import android.widget.GridView;
 import android.widget.ListView;
 import android.widget.TabHost;
 
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonArrayRequest;
+import com.android.volley.toolbox.Volley;
 import com.luuva.adapter.CategoryAdapter;
 import com.luuva.adapter.FoodAdapter;
 import com.luuva.background.CatDao;
 import com.luuva.background.FoodDao;
 import com.luuva.model.Category;
 import com.luuva.model.Food;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 
@@ -45,7 +55,7 @@ public class HomeFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_home,container,false);
         gvCategory = view.findViewById(R.id.gvCategory);
 
-        categories = new ArrayList<>();
+        /*categories = new ArrayList<>();
         categories.add(new Category(1,"Cơm",R.drawable.rice));
         categories.add(new Category(2,"Đồ ăn",R.drawable.food));
         categories.add(new Category(3,"Thức uống",R.drawable.drinks));
@@ -53,12 +63,15 @@ public class HomeFragment extends Fragment {
         categories.add(new Category(5,"Nhà làm",R.drawable.homefood));
         categories.add(new Category(6,"Đồ ăn nhẹ",R.drawable.snacks));
         Log.d("pic 1: ",getResources().getResourceName(R.drawable.rice)+"");
-        catDao = new CatDao();
+        catDao = new CatDao();*/
         foodDao = new FoodDao();
 
         user = foodDao.getList();
+        categories = new ArrayList<>();
+        getList(view);
         adapter = new CategoryAdapter(getActivity(),R.layout.gv_item,categories);
         gvCategory.setAdapter(adapter);
+
 
         //tab1
         lvFood = view.findViewById(R.id.lvPro);
@@ -114,6 +127,47 @@ public class HomeFragment extends Fragment {
             }
         });
         return view;
+    }
+    public void getList(View v){
+        final ArrayList<Category> arrCat = new ArrayList<>();
+        final String url="https://lebavy1611.000webhostapp.com/getlistcat.php";
+        String tag_string_req = "getlistcart";
+
+        JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(Request.Method.GET,url, new Response.Listener<JSONArray>() {
+            @Override
+            public void onResponse(JSONArray response) {
+
+                if (response != null) {
+                    Category objCat;
+
+                    try {
+                        for (int i=0;i<response.length();i++) {
+                            JSONObject jObj = response.getJSONObject(i);
+                            objCat = new Category(jObj.getInt("id"), jObj.getString("name_cat"), "R.drawable." + jObj.getString("picture"));
+                            categories.add(objCat);
+                        }
+                        adapter.notifyDataSetChanged();
+                    }
+
+                    catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+
+                }
+            }
+
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                //Log.e(TAG, "Login Error: " + error.getMessage());
+                //toast("Unknown Error occurred");
+                //progressDialog.hide();
+            }
+        });
+
+        //AndroidLoginController.getInstance().addToRequestQueue(jsonArrayRequest, tag_string_req);
+        RequestQueue requestQueue = Volley.newRequestQueue(v.getContext());
+        requestQueue.add(jsonArrayRequest);
     }
 
 
