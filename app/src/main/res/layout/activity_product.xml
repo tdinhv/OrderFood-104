@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.luuva.orderfood.ProductActivity">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_margin="10dp"
+            android:orientation="vertical">
+
+            <ImageView
+
+                android:id="@+id/imgviewchitietsanpham"
+                android:layout_width="match_parent"
+                android:layout_height="300px"
+                android:src="@mipmap/ic_launcher" />
+
+            <TextView
+                android:id="@+id/tvtensanpham"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Liến Húa - Hủ Tiếu Nam Vang-An Dương Vương"
+                android:textColor="@color/black"
+                android:textSize="20sp" />
+
+            <TextView
+                android:id="@+id/tvdiachi"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="31 An Dương Vương,P.3,Quận 5,TP. HCM"
+                android:textColor="#626264"
+                android:textSize="15sp" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:orientation="horizontal"
+                android:weightSum="3">
+
+                <RatingBar
+                    android:id="@+id/ratingBar"
+                    style="?android:attr/ratingBarStyleSmall"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:numStars="5"
+                    android:stepSize="1.0" />
+
+                <TextView
+                    android:id="@+id/countComment"
+                    android:textColor="@color/black"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="21 bình luận"
+                    android:textAlignment="center" />
+
+                <TextView
+                    android:id="@+id/status"
+                    android:textColor="#24c91a"
+                    android:textStyle="bold"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Đang mở"
+                    android:textAlignment="center" />
+            </LinearLayout>
+            <LinearLayout
+                android:background="@drawable/border_layout"
+                android:layout_marginTop="10dp"
+                android:weightSum="3"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+                <LinearLayout
+                    android:layout_weight="1"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+                    <TextView
+                        android:text="PHÍ DỊCH VỤ"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textAlignment="center"/>
+                    <TextView
+                        android:textColor="@color/black"
+                        android:text="0%"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textAlignment="center"/>
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_weight="1"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+                    <TextView
+                        android:text="PHÍ GIAO HÀNG"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textAlignment="center"/>
+                    <TextView
+                        android:textColor="@color/black"
+                        android:text="6,000đ/km"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textAlignment="center"/>
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_weight="1"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+                    <TextView
+                        android:text="DỊCH VỤ BỞI"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textAlignment="center"/>
+                    <TextView
+                        android:textColor="@color/black"
+                        android:text="DeliveryNow"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textAlignment="center"/>
+                </LinearLayout>
+            </LinearLayout>
+            <ListView
+                android:id="@+id/lv_Product"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"></ListView>
+        </LinearLayout>
+</LinearLayout>
