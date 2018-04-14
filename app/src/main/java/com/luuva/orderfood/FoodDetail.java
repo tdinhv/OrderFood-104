@@ -5,14 +5,20 @@ import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.Spinner;
 import android.widget.TextView;
 
 import com.cepheuen.elegantnumberbutton.view.ElegantNumberButton;
+import com.luuva.model.Cart;
 import com.luuva.model.Food;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 
 public class FoodDetail extends AppCompatActivity {
@@ -21,59 +27,106 @@ public class FoodDetail extends AppCompatActivity {
     ImageView food_image;
     CollapsingToolbarLayout collapsingToolbarLayout;
     FloatingActionButton btnCart;
-    ElegantNumberButton numberButton;
+    Spinner spinner;
 
-    ArrayList<Food> arrFood;
+    ArrayList<Cart> arrCart;
 
-    String foodId = "";
-
+    int idSanpham=0;
+    String TenChiTiet="";
+    int Giachitiet=0;
+    String HinhAnhChiTiet="";
+    int IdShop=0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_food_detail);
-        /*ArrayList<Food> arrFood = new ArrayList<>();
-
-        Food food1 = new Food(1,"Hủ Tiếu",12000,R.drawable.anh1+"","Vinh Nam","Huế",1,1);
-        Food food2 = new Food(1,"Mì Quảng",22000,R.drawable.anh2+"","Vinh Nam","Huế",1,1);
-        Food food3 = new Food(1,"Bún Bò",32000,R.drawable.anh3+"","Vinh Nam","Huế",1,1);
-        Food food4 = new Food(1,"Mì Tôm",45000,R.drawable.anh4+"","Vinh Nam","Huế",1,1);
-        Food food5 = new Food(1,"Cơm Gà",21000,R.drawable.anh5+"","Vinh Nam","Huế",1,1);
-
-        arrFood.add(food1);
-        arrFood.add(food2);
-        arrFood.add(food3);
-        arrFood.add(food4);
-        arrFood.add(food5);*/
-
-
+        Anhxa();
         //Init View
-        numberButton = (ElegantNumberButton) findViewById(R.id.number_button);
-        btnCart = (FloatingActionButton) findViewById(R.id.btnCart);
-
-        food_description = (TextView) findViewById(R.id.food_description);
-        food_name = (TextView) findViewById(R.id.food_name);
-        food_price = (TextView) findViewById(R.id.food_price);
-        food_image = (ImageView) findViewById(R.id.foo_image);
-
         collapsingToolbarLayout = (CollapsingToolbarLayout) findViewById(R.id.collapsing);
         collapsingToolbarLayout.setExpandedTitleTextAppearance(R.style.ExpandedAppbar);
         collapsingToolbarLayout.setCollapsedTitleTextAppearance(R.style.CollapsedAppbar);
 
-        Intent intent =getIntent();
-        Bundle bundle = intent.getBundleExtra("packageFood");
-        Food food = (Food) bundle.getSerializable("food");
-        food_name.setText(food.getNameFood());
-        food_price.setText(food.getPrice()+"");
+        GetInformation();
+        CatchEventSpinner();
         //food_image.setImageResource(Integer.parseInt(food.getImage()));
+        Eventbutton();
+    }
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu,menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()){
+            case R.id.menugiohang:
+                Intent intent = new Intent(getApplicationContext(),CartActivity.class);
+                startActivity(intent);
+
+        }
+        return super.onOptionsItemSelected(item);
+    }
+    private void Eventbutton() {
         btnCart.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(FoodDetail.this, CartActivity.class);
+            public void onClick(View v) {
+                if(MainActivity.listCart.size()>0){
+                    int sl= Integer.parseInt(spinner.getSelectedItem().toString());
+                    boolean exits = false;
+                    for(int i=0;i<MainActivity.listCart.size();i++){
+                        if(MainActivity.listCart.get(i).getIdFood()==idSanpham){
+                            MainActivity.listCart.get(i).setQuantity(MainActivity.listCart.get(i).getQuantity()+sl);
+                            if(MainActivity.listCart.get(i).getQuantity()>=20){
+                                MainActivity.listCart.get(i).setQuantity(20);
+                            }
+                            MainActivity.listCart.get(i).setPrice(Giachitiet*MainActivity.listCart.get(i).getQuantity());
+                            exits = true;
+                        }
+                    }
+                    if(exits==false){
+                        int soluong = Integer.parseInt(spinner.getSelectedItem().toString());
+                        int Giamoi = soluong*Giachitiet;
+                        MainActivity.listCart.add(new Cart(idSanpham,TenChiTiet,Giamoi,HinhAnhChiTiet,soluong,0));
+                    }
+                }else{
+                    int soluong = Integer.parseInt(spinner.getSelectedItem().toString());
+                    int Giamoi = soluong*Giachitiet;
+                    MainActivity.listCart.add(new Cart(idSanpham,TenChiTiet,Giamoi,HinhAnhChiTiet,soluong,0));
+                }
+                Intent intent = new Intent(getApplicationContext(),CartActivity.class);
                 startActivity(intent);
             }
         });
+    }
 
+    private void CatchEventSpinner() {
+        Integer[] soluong =  new  Integer[]{1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20};
+        ArrayAdapter<Integer> arrayAdapter = new ArrayAdapter<Integer>(this,android.R.layout.simple_spinner_dropdown_item,soluong);
+        spinner.setAdapter(arrayAdapter);
+    }
+    private void GetInformation() {
+        Intent intent = getIntent();
+        Bundle bundle = intent.getBundleExtra("packageFood");
+        Food food = (Food) bundle.getSerializable("food");
+        idSanpham= food.getId();
+        TenChiTiet =food.getNameFood();
+        Giachitiet = food.getPrice();
+        HinhAnhChiTiet =food.getImage();
+        IdShop = food.getShopId();
+        food_name.setText(TenChiTiet);
+        DecimalFormat decimalFormat = new DecimalFormat("####,###,###");
+        food_price.setText(decimalFormat.format(Giachitiet));
+    }
+
+    private void Anhxa() {
+        btnCart = (FloatingActionButton) findViewById(R.id.btnCart);
+        spinner = (Spinner) findViewById(R.id.spinner);
+        food_description = (TextView) findViewById(R.id.food_description);
+        food_name = (TextView) findViewById(R.id.food_name);
+        food_price = (TextView) findViewById(R.id.food_price);
+        food_image = (ImageView) findViewById(R.id.foo_image);
     }
 
 }

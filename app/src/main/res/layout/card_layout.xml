@@ -6,44 +6,82 @@
     android:layout_height="wrap_content"
     android:layout_margin="8dp"
     app:cardElevation="4dp">
+
     <LinearLayout
-        android:layout_marginTop="16dp"
-        android:layout_marginBottom="16dp"
-        android:orientation="horizontal"
-        android:layout_gravity="center_vertical"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:layout_marginBottom="16dp"
+        android:layout_marginTop="16dp"
+        android:orientation="horizontal"
+        android:weightSum="5">
+
         <LinearLayout
-            android:orientation="vertical"
-            android:layout_weight="9"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content">
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="2"
+            android:orientation="vertical">
+
             <TextView
                 android:id="@+id/card_item_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:layout_marginLeft="10dp"
                 android:gravity="center_vertical|start"
-                android:textAllCaps="true"
                 android:text="Food1"
-                android:textStyle="bold"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
+                android:textAllCaps="true"
+                android:textStyle="bold" />
+
             <TextView
                 android:id="@+id/card_item_price"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:layout_marginLeft="10dp"
                 android:gravity="center_vertical|start"
-                android:textAllCaps="true"
                 android:text="100,000"
-                android:textStyle="italic"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
+                android:textAllCaps="true"
+                android:textStyle="italic" />
         </LinearLayout>
 
-        <TextView
-            android:id="@+id/card_item_count"
-            android:layout_gravity="center_vertical|end"
-            android:layout_marginRight="16dp"
-            android:layout_width="20dp"
-            android:layout_height="20dp" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="30px"
+            android:layout_weight="3"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <Button
+                android:layout_weight="1"
+                android:layout_gravity="center"
+                android:id="@+id/btnMinus"
+                android:layout_width="50dp"
+                android:layout_height="wrap_content"
+                android:focusable="false"
+                android:text="-"
+                android:textSize="30sp" />
+
+            <Button
+                android:layout_weight="1"
+                android:id="@+id/btnValues"
+                android:layout_width="60dp"
+                android:layout_height="wrap_content"
+                android:background="@null"
+                android:focusable="false"
+                android:text="1"
+                android:textSize="30sp" />
+
+            <Button
+                android:layout_weight="1"
+                android:layout_gravity="center"
+                android:id="@+id/btnPlus"
+                android:layout_width="50dp"
+                android:layout_height="wrap_content"
+                android:focusable="false"
+                android:text="+"
+                android:textSize="30sp" />
+
+        </LinearLayout>
 
     </LinearLayout>
 
