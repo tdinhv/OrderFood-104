@@ -1,22 +1,15 @@
 package com.luuva.model;
 
+import java.io.Serializable;
+
 /**
  * Created by luuva on 3/9/2018.
  */
 
-public class Category {
+public class Category implements Serializable {
     private int id;
     private String name_cat;
     private String picture;
-    private int pic;
-
-    public int getPic() {
-        return pic;
-    }
-
-    public void setPic(int pic) {
-        this.pic = pic;
-    }
 
     public int getId() {
         return id;
@@ -46,12 +39,6 @@ public class Category {
         this.id = id;
         this.name_cat = name_cat;
         this.picture = picture;
-    }
-
-    public Category(int id, String name_cat, int pic) {
-        this.id = id;
-        this.name_cat = name_cat;
-        this.pic = pic;
     }
 
     @Override

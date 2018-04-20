@@ -43,7 +43,6 @@ public class CartActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_cart);
-        Log.d("111111111","aaaaaa");
         AnhXa();
         ActionToolBar();
         CheckData();
