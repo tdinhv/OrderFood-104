@@ -30,7 +30,7 @@
         <activity android:name=".CartActivity" />
         <activity android:name=".FoodDetail" />
         <activity android:name=".ProductActivity" />
-        <activity android:name=".ClientProfiles"></activity>
+        <activity android:name=".ClientProfiles" />
     </application>
 
 </manifest>

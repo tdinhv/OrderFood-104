@@ -74,7 +74,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
             <Button
-                android:id="@+id/btnCancel"
+                android:id="@+id/btnBack"
                 android:layout_marginRight="70dp"
                 android:padding="10px"
                 android:textSize="15sp"
