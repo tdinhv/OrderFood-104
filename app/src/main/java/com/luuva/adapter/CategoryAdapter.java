@@ -38,6 +38,8 @@ public class CategoryAdapter extends ArrayAdapter<Category> {
         LayoutInflater inflater = this.context.getLayoutInflater();
         View row = inflater.inflate(R.layout.gv_item,null);
 
+        //Add comment
+
         ImageButton btnCategory = row.findViewById(R.id.btnCategory);
         TextView txtCategory = row.findViewById(R.id.txtCategory);
 
